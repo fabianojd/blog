@@ -1,17 +1,22 @@
-<html>
-    <head>
-        <title>Contatos</title>
-    </head>
-    <body>
-        <h1>Fabiano Jorge Dornelles<h1>
-        <h2>fabianojd@yahoo.com.br, Fone XXXXXXYY<h2>
-        <a href="https://www.google.com">Link para o site Google</a>
-        <h3><ol>
-            <li>Item 01</li>
-            <li>Item 02</li>
-            <li>Item 03</li>
-            <li>Item 04</li>
-            <li>Item 05</li>
-        </ol></h3>
-    </body>
-</html>
+{% extends "base.html" %}
+
+{%block title %} Página Inicial {% endblock %}
+
+{% block content %}
+{% for post in posts %}
+    <article class="post">
+        <header>
+            <div>
+                <h1>{{ post.title }}</h1>
+                <div class="about">
+                    by {{ post.author }} on {{ post.created.strftime('%d/%m/%Y') }}
+                </div>
+            </div>
+        </header>
+        <p class="body"> {{post.body}} </p>
+    </article>
+    {% if not loop.last %}
+        <hr>
+    {% endif %}    
+{% endfor %}
+{% endblock%}
